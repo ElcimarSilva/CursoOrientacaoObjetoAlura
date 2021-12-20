@@ -1,4 +1,6 @@
 # Criar um aplicação com controle de tv
+
+
 class Programa:
     def __init__(self, nome, ano):
         self._nome = nome.title()
@@ -20,20 +22,20 @@ class Programa:
     def nome(self, nome_nome):
         self._nome = nome_nome.title()
 
+    
+
 class Filme(Programa): # Classe constrtora
     def __init__(self, nome, ano, duracao):
-        self._nome = nome.title()
-        self.ano = ano
+        super().__init__(nome, ano)
         self.duracao = duracao
-        self._likes = 0
 
+    def imprime(self):
+        print(f'{self._nome} - {self.ano} - {self.likes}')
 
 class Serie(Programa):
     def __init__(self, nome, ano, temporadas):
-        self._nome = nome.title()
-        self.ano = ano
+        super().__init__(nome, ano)
         self.temporadas = temporadas
-        self._likes = 0
 
 
 vingadores = Filme('vingadores uhu', 2018, 160)
@@ -44,3 +46,8 @@ atlanta = Serie('atlanta', 2018, 2)
 atlanta.dar_likes()
 print(f'Nome: {atlanta.nome} - Ano: {atlanta.ano} - Temporadas: {atlanta.temporadas} - Likes: {atlanta.likes()}')
 
+filmes_e_series = [vingadores, atlanta]
+
+for programa in filmes_e_series:
+    detalhes = programa.duracao if hasattr(programa, 'duracao') else programa.temporadas # verifica se existe o atributo no if se não vai para o outro
+    print(f'Nome: {programa.nome} - Ano: {programa.ano} - Detalhes: {detalhes} - Likes: {programa.likes()}')
