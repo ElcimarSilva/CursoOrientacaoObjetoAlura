@@ -22,6 +22,8 @@ class Programa:
     def nome(self, nome_nome):
         self._nome = nome_nome.title()
 
+    def __str__(self):
+        return f'{self._nome} - {self.ano} - {self._likes}'
     
 
 class Filme(Programa): # Classe constrtora
@@ -29,8 +31,9 @@ class Filme(Programa): # Classe constrtora
         super().__init__(nome, ano)
         self.duracao = duracao
 
-    def imprime(self):
-        print(f'{self._nome} - {self.ano} - {self.likes}')
+    def __str__(self):
+        return f'{self._nome} - {self.ano} - {self.duracao}- {self._likes}'
+    
 
 class Serie(Programa):
     def __init__(self, nome, ano, temporadas):
@@ -38,16 +41,25 @@ class Serie(Programa):
         self.temporadas = temporadas
 
 
+
+class Playlist:
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self.programas = programas
+
+    def tamanho(self):
+        return len(self.programas)
+
+    def __str__(self):
+        return f'{self._nome} - {self.ano} - {self.temporadas}- {self._likes}'
+
 vingadores = Filme('vingadores uhu', 2018, 160)
 vingadores.dar_likes()
-print(f'Nome: {vingadores.nome} - Ano: {vingadores.ano} - Temporadas: {vingadores.duracao}- Likes: {vingadores.likes()}')
 
 atlanta = Serie('atlanta', 2018, 2)
 atlanta.dar_likes()
-print(f'Nome: {atlanta.nome} - Ano: {atlanta.ano} - Temporadas: {atlanta.temporadas} - Likes: {atlanta.likes()}')
 
 filmes_e_series = [vingadores, atlanta]
 
 for programa in filmes_e_series:
-    detalhes = programa.duracao if hasattr(programa, 'duracao') else programa.temporadas # verifica se existe o atributo no if se não vai para o outro
-    print(f'Nome: {programa.nome} - Ano: {programa.ano} - Detalhes: {detalhes} - Likes: {programa.likes()}')
+    print(programa)
