@@ -1,3 +1,4 @@
+from abc import ABC # abstract base classes
 # Criar um aplicação com controle de tv
 
 
